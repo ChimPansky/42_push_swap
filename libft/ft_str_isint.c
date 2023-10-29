@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:57:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/28 21:11:17 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/10/29 20:28:21 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	handle_sign(char **s, int *neg_mult)
 	}
 }
 // check for -0
+#include <stdio.h>
 int	ft_str_isint(char *s, int *target)
 {
 	int		isnum;
 	int		neg_mult;
-	size_t	result;
+	long	result;
 
 	*target = 0;
 	neg_mult = 1;
@@ -37,8 +38,8 @@ int	ft_str_isint(char *s, int *target)
 		if (ft_isdigit(*s))
 		{
 			result = result * 10 + *s - '0';
-			if ((neg_mult == -1 && (result * neg_mult) < (size_t)INT_MIN)
-				|| (neg_mult == 1 && result > (size_t)INT_MAX))
+			if ((neg_mult == -1 && (result * neg_mult) < INT_MIN)
+				|| (neg_mult == 1 && result > INT_MAX))
 				return (0);
 			isnum = 1;
 		}

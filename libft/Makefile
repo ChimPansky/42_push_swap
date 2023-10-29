@@ -1,6 +1,6 @@
 NAME = libft.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I ../include
+CFLAGS = -Wall -Werror -Wextra -g -I ../include
 HEADER = ../include/libft.h
 #HEADER = ./libft.h
 

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:42:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/28 18:56:11 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/10/29 21:48:01 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ void	stack_swap(t_stack *stack);
 void	stack_transfer_top(t_stack *src, t_stack *dst);
 void	stack_rotate_up(t_stack *stack);
 void	stack_rotate_down(t_stack *stack);
+int		stack_find_val(t_stack stack, int new_val);
+int		read_stack(int ac, char **av, t_stack *stack);
 
 #endif

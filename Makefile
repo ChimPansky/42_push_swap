@@ -1,4 +1,5 @@
 NAME = push_swap
+CHECKER_NAME = checker
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 SOURCE_DIR = src/
@@ -18,7 +19,7 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC_FILES = push_swap
+SRC_FILES = push_swap push_swap_utils
 
 SRC = $(addsuffix .c, $(addprefix $(SOURCE_DIR),$(SRC_FILES)))
 
@@ -34,12 +35,16 @@ $(NAME): $(LIBFT_NAME) $(OBJ) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_NAME) -o $(NAME)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
+$(CHECKER_NAME): $(LIBFT_NAME) $(OBJ) $(HEADER)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_NAME) -o $(CHECKER_NAME)
+	@echo "$(GREEN)Executable $(CHECKER_NAME) created!$(DEF_COLOR)"
+
 $(LIBFT_NAME): $(LIBFT_DIR)$(LIBFT_NAME)
 	cp $(LIBFT_DIR)$(LIBFT_NAME) ./$(LIBFT_NAME)
 
 $(LIBFT_DIR)$(LIBFT_NAME): make_libft
 
-bonus: all
+bonus: $(CHECKER_NAME)
 
 %.o : %.c $(HEADER)
 	$(CC) -I $(INCLUDE_DIR) $(CFLAGS) -g -c $< -o $@
@@ -49,7 +54,7 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME) $(LIBFT_NAME)
+	rm -f $(NAME) $(CHECKER_NAME) $(LIBFT_NAME)
 
 re: fclean all
 

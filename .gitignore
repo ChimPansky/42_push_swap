@@ -1,4 +1,6 @@
 # Chimpansky files
+push_swap
+checker
 .vscode
 *.Xc
 *.pdf
@@ -10,6 +12,7 @@
 *.png
 *.so
 *.a
+test.c
 
 # Prerequisites
 *.d
