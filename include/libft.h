@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:40:07 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/28 20:04:44 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:16:57 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	*ft_print_memory_width(void *addr, size_t size, size_t wdth);
 void	*ft_print_memory(void *addr, size_t size);
 int		ft_str_isnum(char *c);
 int		ft_str_isint(char *c, int *target);
+size_t	ft_str_chr_replace(char *s, char old_c, char new_c);
 
 // Libft Additions for Printf:
 size_t	ft_get_int_order_base(size_t nb, size_t base_len);
@@ -125,7 +126,8 @@ typedef struct s_format
 }			t_format;
 
 int		ft_printf(const char *format, ...);
-int		ft_printf_fd(int fd, const char *format, va_list args);
+int		ft_dprintf(int fd, const char *format, ...);
+int		ft_vdprintf(int fd, const char *format, va_list args);
 int		output_percent(int fd, const char **format);
 int		output_conversion(int fd, t_format conf, va_list args);
 int		output_c(int fd, t_format conf, va_list args);
@@ -177,6 +179,8 @@ int		stack_push_top_node(t_stack *stack, t_snode *snode);
 int		stack_push_bot_node(t_stack *stack, t_snode *snode);
 t_snode	*stack_pop(t_stack *stack);
 t_snode	*stack_bottom(t_stack *stack);
+void	stack_snode_del(t_snode *snode);
+void	stack_clear(t_stack *stack);
 
 void	stack_print(t_stack stack);
 void	stacks_print(t_stack stack_a, t_stack stack_b);

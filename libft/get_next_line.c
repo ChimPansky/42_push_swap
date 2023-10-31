@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:05:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/28 13:32:34 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/10/30 09:08:14 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	gnl_init(int fd, t_buffer *buf, t_buffer *line, int *err)
 	}
 	if ((!buf->len && !buf->last_read))
 	{
-		free_and_null((void **)buf->cont);
+		ft_free_and_null((void **)buf->cont);
 		buf->len = 0;
 		return (0);
 	}
@@ -116,10 +116,10 @@ char	*get_next_line(int fd)
 	while (!create_line(fd, &buf[fd], &line, &err))
 		;
 	if (err)
-		free_and_null((void **)&line.cont);
+		ft_free_and_null((void **)&line.cont);
 	if (!line.cont || err || (!buf[fd].len && !buf[fd].last_read))
 	{
-		free_and_null((void **)&buf[fd].cont);
+		ft_free_and_null((void **)&buf[fd].cont);
 		buf[fd].len = 0;
 	}
 	return (line.cont);

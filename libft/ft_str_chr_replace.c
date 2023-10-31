@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_str_chr_replace.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 13:42:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/30 16:01:57 by tkasbari         ###   ########.fr       */
+/*   Created: 2023/10/30 09:35:07 by tkasbari          #+#    #+#             */
+/*   Updated: 2023/10/30 09:48:43 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include <libft.h>
 
-# include "libft.h"
+size_t	ft_str_chr_replace(char *s, char old_c, char new_c)
+{
+	size_t	counter;
 
-int	stack_read(int ac, char **av, t_stack *stack);
-int	stack_find_val(t_stack stack, int new_val);
-int	stack_check_sorted(t_stack stack_a);
-int	throw_error_push_swap(int error_nr);
-
-#endif
+	counter = 0;
+	while(*s)
+	{
+		if (*s == old_c)
+		{
+			*s = new_c;
+			counter++;
+		}
+		s++;
+	}
+	return (counter);
+}

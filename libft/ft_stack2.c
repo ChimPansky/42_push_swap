@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:42:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/28 17:20:07 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:33:50 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,32 @@ t_snode	*stack_bottom(t_stack *stack)
 	while (last && last->next)
 		last = last->next;
 	return (last);
+}
+
+void	stack_clear(t_stack *stack)
+{
+	t_snode	*current;
+	t_snode	*next;
+
+	if (!stack)
+		return ;
+	current = stack->top;
+	while (current)
+	{
+		next = current->next;
+		stack_snode_del(current);
+		current = next;
+	}
+	stack->top = NULL;
+}
+
+void	stack_snode_del(t_snode *snode)
+{
+	if (snode)
+	{
+		free(snode);
+		snode = NULL;
+	}
 }
 
 void	stack_print(t_stack stack)
