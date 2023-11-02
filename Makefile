@@ -21,9 +21,9 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC_FILES = push_swap push_swap_utils
+SRC_FILES = push_swap ps_operations ps_sorting ps_utils ft_stack1 ft_stack2
 
-SRC_FILES_BONUS = push_swap_bonus push_swap_utils push_swap_utils_bonus
+SRC_FILES_BONUS = push_swap_bonus ps_operations ps_sorting ps_utils ft_stack1 ft_stack2
 
 SRC = $(addsuffix .c, $(addprefix $(SOURCE_DIR),$(SRC_FILES)))
 
@@ -54,7 +54,7 @@ $(LIBFT_DIR)$(LIBFT_NAME): make_libft
 
 bonus: $(NAME_BONUS)
 
-%.o : %.c $(HEADER)
+%.o : %.c $(HEADER) $(HEADER_BONUS)
 	$(CC) -I $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
 
 clean:

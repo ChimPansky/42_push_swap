@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:40:07 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/30 16:16:57 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:13:14 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,33 +157,5 @@ typedef struct s_buffer
 
 void	ft_free_and_null(void **ptr);
 char	*get_next_line(int fd);
-
-// Libft Additions for Stacks (Pushswap):
-typedef struct s_stack_node
-{
-	int	val;
-	struct s_stack_node *next;
-
-}			t_snode;
-
-typedef struct s_stack
-{
-	t_snode	*top;
-}			t_stack;
-
-size_t	stack_size(t_stack stack);
-int		stack_peek(t_snode snode);
-int		stack_push_top_val(t_stack *stack, int val);
-int		stack_push_bot_val(t_stack *stack, int val);
-int		stack_push_top_node(t_stack *stack, t_snode *snode);
-int		stack_push_bot_node(t_stack *stack, t_snode *snode);
-t_snode	*stack_pop(t_stack *stack);
-t_snode	*stack_bottom(t_stack *stack);
-void	stack_snode_del(t_snode *snode);
-void	stack_clear(t_stack *stack);
-
-void	stack_print(t_stack stack);
-void	stacks_print(t_stack stack_a, t_stack stack_b);
-
 
 #endif

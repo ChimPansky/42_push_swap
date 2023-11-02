@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils_bonus.c                            :+:      :+:    :+:   */
+/*   ps_operations.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 10:49:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/31 13:33:28 by tkasbari         ###   ########.fr       */
+/*   Created: 2023/10/29 21:38:32 by tkasbari          #+#    #+#             */
+/*   Updated: 2023/11/02 13:35:18 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap_bonus.h"
+#include "push_swap.h"
 
 int	stack_swap(t_stack *stack)
 {
@@ -64,29 +64,30 @@ int	stack_rotate_down(t_stack *stack)
 	return (1);
 }
 
-int	stack_execute_command(char *command, int *op_count,
-	t_stack *stack_a, t_stack *stack_b)
+int	stack_execute_op(char *op, int *op_count,
+	t_stack *stack_a, t_stack *stack_b, int replace_nl)
 {
-	int	command_valid;
+	int	op_valid;
 
-	command_valid = 0;
-	ft_str_chr_replace(command, '\n', '\0');
-	if (!ft_strncmp(command, "sa", 3) || !ft_strncmp(command, "ss", 3))
-		command_valid = stack_swap(stack_a);
-	if (!ft_strncmp(command, "sb", 3) || !ft_strncmp(command, "ss", 3))
-		command_valid = stack_swap(stack_b);
-	if (!ft_strncmp(command, "pa", 3))
-		command_valid = stack_transfer_top(stack_b, stack_a);
-	if (!ft_strncmp(command, "pb", 3))
-		command_valid = stack_transfer_top(stack_a, stack_b);
-	if (!ft_strncmp(command, "ra", 3) || !ft_strncmp(command, "rr", 3))
-		command_valid = stack_rotate_up(stack_a);
-	if (!ft_strncmp(command, "rb", 3) || !ft_strncmp(command, "rr", 3))
-		command_valid = stack_rotate_up(stack_b);
-	if (!ft_strncmp(command, "rra", 4) || !ft_strncmp(command, "rrr", 4))
-		command_valid = stack_rotate_down(stack_a);
-	if (!ft_strncmp(command, "rrb", 4) || !ft_strncmp(command, "rrr", 4))
-		command_valid = stack_rotate_down(stack_b);
-	*op_count += command_valid;
-	return (command_valid);
+	op_valid = 0;
+	if (replace_nl)
+		ft_str_chr_replace(op, '\n', '\0');
+	if (!ft_strncmp(op, "sa", 3) || !ft_strncmp(op, "ss", 3))
+		op_valid = stack_swap(stack_a);
+	if (!ft_strncmp(op, "sb", 3) || !ft_strncmp(op, "ss", 3))
+		op_valid = stack_swap(stack_b);
+	if (!ft_strncmp(op, "pa", 3))
+		op_valid = stack_transfer_top(stack_b, stack_a);
+	if (!ft_strncmp(op, "pb", 3))
+		op_valid = stack_transfer_top(stack_a, stack_b);
+	if (!ft_strncmp(op, "ra", 3) || !ft_strncmp(op, "rr", 3))
+		op_valid = stack_rotate_up(stack_a);
+	if (!ft_strncmp(op, "rb", 3) || !ft_strncmp(op, "rr", 3))
+		op_valid = stack_rotate_up(stack_b);
+	if (!ft_strncmp(op, "rra", 4) || !ft_strncmp(op, "rrr", 4))
+		op_valid = stack_rotate_down(stack_a);
+	if (!ft_strncmp(op, "rrb", 4) || !ft_strncmp(op, "rrr", 4))
+		op_valid = stack_rotate_down(stack_b);
+	*op_count += op_valid;
+	return (op_valid);
 }

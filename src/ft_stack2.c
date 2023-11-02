@@ -6,11 +6,11 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:42:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/30 16:33:50 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:38:36 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 size_t	stack_size(t_stack stack)
 {
@@ -38,6 +38,7 @@ t_snode	*stack_pop(t_stack *stack)
 	{
 		stack->top = popee->next;
 		popee->next = NULL;
+		stack->size--;
 	}
 	return (popee);
 }
@@ -66,7 +67,7 @@ void	stack_clear(t_stack *stack)
 		stack_snode_del(current);
 		current = next;
 	}
-	stack->top = NULL;
+	stack_reset(stack);
 }
 
 void	stack_snode_del(t_snode *snode)
@@ -92,6 +93,7 @@ void	stack_print(t_stack stack)
 		current = current->next;
 	}
 	ft_printf("-------|\n");
+	ft_printf("stack_size: %d\n", stack.size);
 }
 
 void	stacks_print(t_stack stack_a, t_stack stack_b)
@@ -120,5 +122,5 @@ void	stacks_print(t_stack stack_a, t_stack stack_b)
 			ft_printf("%6s|\n", "");
 	}
 	ft_printf("---------------\n");
-	ft_printf("%4s   |%4s\n", "a", "b");
+	ft_printf("%s:%4d |%s:%4d\n", "a", stack_a.size, "b", stack_b.size);
 }

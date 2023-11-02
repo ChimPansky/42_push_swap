@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 21:38:32 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/30 16:44:56 by tkasbari         ###   ########.fr       */
+/*   Created: 2023/11/02 12:04:12 by tkasbari          #+#    #+#             */
+/*   Updated: 2023/11/02 12:48:26 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	stack_find_val(t_stack stack, int new_val)
 	}
 	return (0);
 }
+
 int	stack_read(int ac, char **av, t_stack *stack)
 {
 	int	i;
