@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 15:14:08 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/04 13:14:06 by tkasbari         ###   ########.fr       */
+/*   Created: 2023/11/04 17:53:00 by tkasbari          #+#    #+#             */
+/*   Updated: 2023/11/04 17:53:46 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_max(int a, int b)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
-
-	if (ac < 2)
-		return (0);
-	stack_reset(&stack_a);
-	stack_reset(&stack_b);
-	if (!stack_read(ac, av, &stack_a))
-		return (ps_throw_error(1));
-	if (stack_check_sorted(stack_a))
-	{
-		stack_clear(&stack_a);
-		return (0);
-	}
-	sort_stack(&stack_a, &stack_b);
-	stack_clear(&stack_a);
-	stack_clear(&stack_b);
-	return (0);
+	if (a > b)
+		return (a);
+	return (b);
 }

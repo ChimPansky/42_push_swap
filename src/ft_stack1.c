@@ -6,18 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:29:41 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/02 15:59:43 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:53:19 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	stack_peek(t_snode snode)
-{
-	if (!snode.val)
-		return (0);
-	return (snode.val);
-}
 
 void	stack_reset(t_stack *stack)
 {
@@ -37,7 +31,7 @@ void	snode_reset(t_snode *snode)
 
 void	stack_update(t_stack *stack)
 {
-	size_t ind;
+	int 	ind;
 	t_snode	*cur;
 	t_snode	*min;
 	t_snode	*max;

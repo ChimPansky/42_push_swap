@@ -31,10 +31,11 @@ SRC_FILES = ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 	ft_strreplicate \
 	ft_strlpad ft_strrpad ft_strlpad_free ft_strrpad_free \
 	ft_str_isnum ft_str_isint ft_str_chr_replace \
+	ft_abs ft_max \
 	ft_print_memory	\
 	ft_printf ft_printf_config ft_printf_manipulations \
 	ft_printf_output ft_printf_utils \
-	ft_free_and_null get_next_line 
+	ft_free_and_null get_next_line
 
 
 SRC = $(addsuffix .c, $(SRC_FILES))

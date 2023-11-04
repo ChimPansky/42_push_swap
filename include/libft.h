@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:40:07 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/03 11:57:08 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:54:10 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	*ft_print_memory(void *addr, size_t size);
 int		ft_str_isnum(char *c);
 int		ft_str_isint(char *c, int *target);
 size_t	ft_str_chr_replace(char *s, char old_c, char new_c);
+int		ft_abs(int x);
+int		ft_max(int a, int b);
 
 // Libft Additions for Printf:
 size_t	ft_get_int_order_base(size_t nb, size_t base_len);

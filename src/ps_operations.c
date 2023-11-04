@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:38:32 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/02 13:35:18 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:13:20 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,12 @@ int	stack_rotate_down(t_stack *stack)
 	return (1);
 }
 
-int	stack_execute_op(char *op, int *op_count,
-	t_stack *stack_a, t_stack *stack_b, int replace_nl)
+int	stack_execute_op(
+	char *op, t_stack *stack_a, t_stack *stack_b)
 {
 	int	op_valid;
 
 	op_valid = 0;
-	if (replace_nl)
-		ft_str_chr_replace(op, '\n', '\0');
 	if (!ft_strncmp(op, "sa", 3) || !ft_strncmp(op, "ss", 3))
 		op_valid = stack_swap(stack_a);
 	if (!ft_strncmp(op, "sb", 3) || !ft_strncmp(op, "ss", 3))
@@ -88,6 +86,5 @@ int	stack_execute_op(char *op, int *op_count,
 		op_valid = stack_rotate_down(stack_a);
 	if (!ft_strncmp(op, "rrb", 4) || !ft_strncmp(op, "rrr", 4))
 		op_valid = stack_rotate_down(stack_b);
-	*op_count += op_valid;
 	return (op_valid);
 }

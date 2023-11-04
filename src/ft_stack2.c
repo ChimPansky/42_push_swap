@@ -6,11 +6,18 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:42:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/02 12:38:36 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:07:49 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	stack_peek(t_snode snode)
+{
+	if (!snode.val)
+		return (0);
+	return (snode.val);
+}
 
 size_t	stack_size(t_stack stack)
 {
@@ -27,6 +34,23 @@ size_t	stack_size(t_stack stack)
 		current = current->next;
 	}
 	return (size);
+}
+
+int	stack_find_val(t_stack stack, int new_val)
+{
+	int		index;
+	t_snode	*current;
+
+	index = 0;
+	current = stack.top;
+	while (current)
+	{
+		if (current->val == new_val)
+			return (index);
+		current = current->next;
+		index++;
+	}
+	return (-1);
 }
 
 t_snode	*stack_pop(t_stack *stack)

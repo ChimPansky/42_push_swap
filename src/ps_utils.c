@@ -6,25 +6,13 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:04:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/03 14:59:38 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 14:10:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	stack_find_val(t_stack stack, int new_val)
-{
-	t_snode	*current;
 
-	current = stack.top;
-	while (current)
-	{
-		if (current->val == new_val)
-			return (1);
-		current = current->next;
-	}
-	return (0);
-}
 void	free_splitted(char	**splitted)
 {
 	char	**to_free;
@@ -32,13 +20,14 @@ void	free_splitted(char	**splitted)
 	if (!splitted)
 		return ;
 	to_free = splitted;
-	while(*splitted)
+	while (*splitted)
 	{
 		free(*splitted);
 		splitted++;
 	}
 	free(to_free);
 }
+
 int	stack_read(int ac, char **av, t_stack *stack)
 {
 	int		i;
@@ -49,21 +38,21 @@ int	stack_read(int ac, char **av, t_stack *stack)
 	i = 1;
 	while (i < ac)
 	{
-		splitted = ft_split(av[i], ' ');
+		splitted = ft_split(av[i++], ' ');
 		to_free = splitted;
 		while (*splitted)
 		{
 			if (!ft_str_isint(*splitted, &new_val)
-				|| stack_find_val(*stack, new_val)
+				|| stack_find_val(*stack, new_val) != -1
 				|| !stack_push_bot_val(stack, new_val))
 			{
+				stack_clear(stack);
 				free_splitted(to_free);
-				return (throw_error_push_swap(1) && 0);
+				return (0);
 			}
 			splitted++;
 		}
 		free_splitted(to_free);
-		i++;
 	}
 	return (1);
 }
@@ -82,9 +71,10 @@ int	stack_check_sorted(t_stack stack_a)
 	return (1);
 }
 
-int	throw_error_push_swap(int error_nr)
+int	ps_throw_error(int error_nr)
 {
 	char	*err_msg;
+
 	if (error_nr == 1)
 		err_msg = "Error";
 	else

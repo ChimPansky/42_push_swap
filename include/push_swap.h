@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:42:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/02 23:31:08 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:48:23 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct s_stack_node
 {
 	int					val;
-	size_t				index;
+	int					index;
 	struct s_stack_node *target;
 	struct s_stack_node *next;
 
@@ -30,12 +30,12 @@ typedef struct s_stack_node
 
 typedef struct s_stack
 {
-	t_snode	*top;
-	int		minval;
-	size_t	minind;
-	int		maxval;
-	size_t	maxind;
-	size_t	size;
+	t_snode		*top;
+	int			minval;
+	int			minind;
+	int			maxval;
+	int			maxind;
+	size_t		size;
 }			t_stack;
 
 // Standard Stack Functions
@@ -64,29 +64,27 @@ int	stack_transfer_top(t_stack *src, t_stack *dst);
 int	stack_rotate_up(t_stack *stack);
 int	stack_rotate_down(t_stack *stack);
 
-int	stack_execute_op(char *command, int *op_count,
-		t_stack *stack_a, t_stack *stack_b, int replace_nl);
+int	stack_execute_op(char *op, t_stack *stack_a, t_stack *stack_b);
 
-// Functions for calculating optimal operations:
-int		get_move_top_cost(t_stack stack, size_t index);	//todo
+// Functions for calculating optimal operations for sorting:
+int		get_move_top_cost(t_stack stack, int index);	//todo
 t_snode	*get_target_snode(t_stack stack, t_snode snode);	//todo
 
-// Functions for printing out sort-operations to File Descriptor fd:
-void	print_and_execute(char *op, t_stack *stack_a,
-	t_stack *stack_b, int *op_count);
-void	snode_move_top(t_stack *stack_a, t_stack *stack_b,
-		int index_a, int index_b, int *op_count);
-void	stack_three_sort(t_stack *stack, int *op_count);
-size_t	find_target_ind_b(t_stack *stack_b, int val_a);
-void	move_a_to_b(t_stack *stack_a, t_stack *stack_b, int *op_count);
-void	move_b_to_a(t_stack *stack_a, t_stack *stack_b, int *op_count);
+// Functions for sorting and printing out sort-operations to File Descriptor fd:
+void	sort_stack(t_stack *stack_a, t_stack *stack_b);
+void	sort_three_stack(t_stack *stack);
+void	print_and_execute(char *op, t_stack *stack_a, t_stack *stack_b);
+void	rotate_elements_top(t_stack *stack_a, t_stack *stack_b,
+		int index_a, int index_b);
+int		find_target_ind_b(t_stack *stack_b, int val_a);
+void	push_a_to_b(t_stack *stack_a, t_stack *stack_b);
+void	push_b_to_a(t_stack *stack_a, t_stack *stack_b);
 
 
 // Stack reading and validating:
 int	stack_read(int ac, char **av, t_stack *stack);
 int	stack_check_sorted(t_stack stack_a);
 
-
-int	throw_error_push_swap(int error_nr);
+int	ps_throw_error(int error_nr);
 
 #endif

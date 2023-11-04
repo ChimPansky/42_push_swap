@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:42:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/03 12:44:31 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:24:24 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 # define PUSH_SWAP_BONUS_H
 
 # include "push_swap.h"
-
-# ifndef DISPLAY_INFO
-#  define DISPLAY_INFO 1
-# endif
 
 #endif
