@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:42:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/02 15:47:57 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/02 23:31:08 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft.h"
 
-# ifndef OUTPUT_FD
-#  define OUTPUT_FD 1
+# ifndef OPERATIONS_FD
+#  define OPERATIONS_FD 1
 # endif
 
 typedef struct s_stack_node
@@ -72,12 +72,14 @@ int		get_move_top_cost(t_stack stack, size_t index);	//todo
 t_snode	*get_target_snode(t_stack stack, t_snode snode);	//todo
 
 // Functions for printing out sort-operations to File Descriptor fd:
-void	print_and_execute(int fd, char *op, t_stack *stack_a,
+void	print_and_execute(char *op, t_stack *stack_a,
 	t_stack *stack_b, int *op_count);
-void	snode_move_top(int fd, t_stack *stack, t_snode *snode); //todo
-void	stack_three_sort(int fd, t_stack *stack, int *op_count);
-void	move_a_to_b(int fd, t_stack *stack_a, t_stack *stack_b, int *op_count);
-void	move_b_to_a(int fd, t_stack *stack_a, t_stack *stack_b, int *op_count);
+void	snode_move_top(t_stack *stack_a, t_stack *stack_b,
+		int index_a, int index_b, int *op_count);
+void	stack_three_sort(t_stack *stack, int *op_count);
+size_t	find_target_ind_b(t_stack *stack_b, int val_a);
+void	move_a_to_b(t_stack *stack_a, t_stack *stack_b, int *op_count);
+void	move_b_to_a(t_stack *stack_a, t_stack *stack_b, int *op_count);
 
 
 // Stack reading and validating:

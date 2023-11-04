@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:43:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/02 13:35:58 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:52:01 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	stack_reset(&stack_a);
-	stack_reset(&stack_b);
 	if (!stack_read(ac, av, &stack_a))
+	{
+		stack_clear(&stack_a);
 		return (1);
-	stacks_print(stack_a, stack_b);
+	}
+	stack_reset(&stack_b);
 	op = get_next_line(STDIN_FILENO);
 	while (op)
 	{

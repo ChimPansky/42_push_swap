@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:57:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/29 20:28:21 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/03 11:42:30 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	handle_sign(char **s, int *neg_mult)
 		(*s)++;
 	}
 }
-// check for -0
-#include <stdio.h>
+
 int	ft_str_isint(char *s, int *target)
 {
 	int		isnum;
@@ -32,6 +31,7 @@ int	ft_str_isint(char *s, int *target)
 	*target = 0;
 	neg_mult = 1;
 	result = 0;
+	isnum = 0;
 	handle_sign(&s, &neg_mult);
 	while (*s)
 	{
@@ -50,3 +50,10 @@ int	ft_str_isint(char *s, int *target)
 	*target = result * neg_mult;
 	return (isnum);
 }
+/*
+int	main()
+{
+	int a;
+	printf("%d", ft_str_isint("-", &a));
+}
+*/
