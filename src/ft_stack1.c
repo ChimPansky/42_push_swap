@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 12:29:41 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/04 13:53:19 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/05 10:16:23 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	stack_update(t_stack *stack)
 	t_snode	*max;
 
 	if (!stack->top)
+	{
 		stack_reset(stack);
+		return ;
+	}
 	ind = 0;
 	cur = stack->top;
 	while (cur)

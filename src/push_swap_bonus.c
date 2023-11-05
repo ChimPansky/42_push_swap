@@ -6,16 +6,18 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:43:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/04 18:56:11 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/05 13:03:02 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
+// if stack_execute_op fails:
+// since we are stopping before GNL reached EOF last GNL did not return NULL,
+// static buffer hasnt been cleared -> BUFFER_SIZE bytes still in use at exit
 int	read_and_execute_ops(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*op;
-	int	i = 1;
 
 	op = get_next_line(STDIN_FILENO);
 	while (op)
@@ -29,8 +31,6 @@ int	read_and_execute_ops(t_stack *stack_a, t_stack *stack_b)
 			return (0);
 		}
 		free(op);
-		ft_printf("%d\n", i++);
-		stacks_print(*stack_a, *stack_b);
 		op = get_next_line(STDIN_FILENO);
 	}
 	return (1);
