@@ -1,71 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack2.c                                        :+:      :+:    :+:   */
+/*   ft_stack3..c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:42:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/04 14:07:49 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:48:13 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	stack_peek(t_snode snode)
-{
-	if (!snode.val)
-		return (0);
-	return (snode.val);
-}
-
-size_t	stack_size(t_stack stack)
-{
-	size_t	size;
-	t_snode	*current;
-
-	if (!stack.top)
-		return (0);
-	size = 1;
-	current = stack.top;
-	while (current->next)
-	{
-		size++;
-		current = current->next;
-	}
-	return (size);
-}
-
-int	stack_find_val(t_stack stack, int new_val)
-{
-	int		index;
-	t_snode	*current;
-
-	index = 0;
-	current = stack.top;
-	while (current)
-	{
-		if (current->val == new_val)
-			return (index);
-		current = current->next;
-		index++;
-	}
-	return (-1);
-}
-
-t_snode	*stack_pop(t_stack *stack)
-{
-	t_snode	*popee;
-
-	popee = stack->top;
-	if (popee)
-	{
-		stack->top = popee->next;
-		popee->next = NULL;
-		stack->size--;
-	}
-	return (popee);
-}
 
 t_snode	*stack_bottom(t_stack *stack)
 {
@@ -75,6 +20,15 @@ t_snode	*stack_bottom(t_stack *stack)
 	while (last && last->next)
 		last = last->next;
 	return (last);
+}
+
+void	stack_snode_del(t_snode *snode)
+{
+	if (snode)
+	{
+		free(snode);
+		snode = NULL;
+	}
 }
 
 void	stack_clear(t_stack *stack)
@@ -94,15 +48,7 @@ void	stack_clear(t_stack *stack)
 	stack_reset(stack);
 }
 
-void	stack_snode_del(t_snode *snode)
-{
-	if (snode)
-	{
-		free(snode);
-		snode = NULL;
-	}
-}
-
+/*
 void	stack_print(t_stack stack)
 {
 	t_snode	*current;
@@ -148,3 +94,4 @@ void	stacks_print(t_stack stack_a, t_stack stack_b)
 	ft_printf("---------------\n");
 	ft_printf("%s:%4d |%s:%4d\n", "a", stack_a.size, "b", stack_b.size);
 }
+*/

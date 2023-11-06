@@ -9,7 +9,6 @@ LIBFT_NAME = libft.a
 HEADER = $(INCLUDE_DIR)push_swap.h
 HEADER_BONUS = $(INCLUDE_DIR)push_swap_bonus.h
 
-
 #Colors
 DEF_COLOR = \033[0;39m
 GRAY = \033[0;90m
@@ -21,36 +20,34 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC_FILES = push_swap ps_operations ps_sorting ps_utils ft_stack1 ft_stack2
+COMMON_FILES = ps_stack1 ps_stack2 ps_stack3 ps_utils ps_operations
 
-SRC_FILES_BONUS = push_swap_bonus ps_operations ps_sorting ps_utils ft_stack1 ft_stack2
+PS_FILES = push_swap ps_sorting ps_sort_calculations
 
-SRC = $(addsuffix .c, $(addprefix $(SOURCE_DIR),$(SRC_FILES)))
+BONUS_FILES = push_swap_bonus
 
-SRC_BONUS = $(addsuffix .c, $(addprefix $(SOURCE_DIR),$(SRC_FILES_BONUS)))
+SRC = $(addsuffix .c, $(addprefix $(SOURCE_DIR),$(COMMON_FILES) $(PS_FILES)))
+
+SRC_BONUS = $(addsuffix .c, $(addprefix $(SOURCE_DIR),$(COMMON_FILES) $(BONUS_FILES)))
 
 OBJ = $(SRC:.c=.o)
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-all: make_libft $(NAME)
+all: libft
+	make $(NAME)
+	make $(NAME_BONUS)
 
-make_libft:
+libft:
 	make -C $(LIBFT_DIR)
 
-# Fix problem when modifying libft source files and then calling make push_swap...
-$(NAME): $(LIBFT_NAME) $(OBJ) $(HEADER)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_NAME) -o $(NAME)
+$(NAME): $(LIBFT_DIR)$(LIBFT_NAME) $(OBJ) $(HEADER)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME) -o $(NAME)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
-$(NAME_BONUS): $(LIBFT_NAME) $(OBJ_BONUS) $(HEADER_BONUS)
-	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT_NAME) -o $(NAME_BONUS)
+$(NAME_BONUS): $(LIBFT_DIR)$(LIBFT_NAME) $(OBJ_BONUS) $(HEADER_BONUS)
+	$(CC) $(CFLAGS) $(OBJ_BONUS) $(LIBFT_DIR)$(LIBFT_NAME) -o $(NAME_BONUS)
 	@echo "$(GREEN)Executable $(NAME_BONUS) created!$(DEF_COLOR)"
-
-$(LIBFT_NAME): $(LIBFT_DIR)$(LIBFT_NAME)
-	cp $(LIBFT_DIR)$(LIBFT_NAME) ./$(LIBFT_NAME)
-
-$(LIBFT_DIR)$(LIBFT_NAME): make_libft
 
 bonus: $(NAME_BONUS)
 
@@ -58,12 +55,12 @@ bonus: $(NAME_BONUS)
 	$(CC) -I $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
 
 clean:
-	make -C $(LIBFT_DIR) fclean
+	make -C $(LIBFT_DIR) clean
 	rm -f $(OBJ) $(OBJ_BONUS)
 
 fclean: clean
-	rm -f $(NAME) $(NAME_BONUS) $(LIBFT_NAME)
+	rm -f $(LIBFT_DIR)$(LIBFT_NAME) $(NAME) $(NAME_BONUS)
 
 re: fclean all
 
-.PHONY: all make_libft clean fclean re bonus
+.PHONY: all libft clean fclean re bonus

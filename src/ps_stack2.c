@@ -1,70 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack1.c                                        :+:      :+:    :+:   */
+/*   ft_stack2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 12:29:41 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/05 10:16:23 by tkasbari         ###   ########.fr       */
+/*   Created: 2023/10/28 16:42:58 by tkasbari          #+#    #+#             */
+/*   Updated: 2023/11/06 11:48:20 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-void	stack_reset(t_stack *stack)
+t_snode	*stack_pop(t_stack *stack)
 {
-	stack->top = NULL;
-	stack->size = 0;
-	stack->minval = 0;
-	stack->maxval = 0;
-}
+	t_snode	*popee;
 
-void	snode_reset(t_snode *snode)
-{
-	snode->val = 0;
-	snode->index = 0;
-	snode->target = NULL;
-	snode->next = NULL;
-}
-
-void	stack_update(t_stack *stack)
-{
-	int 	ind;
-	t_snode	*cur;
-	t_snode	*min;
-	t_snode	*max;
-
-	if (!stack->top)
+	popee = stack->top;
+	if (popee)
 	{
-		stack_reset(stack);
-		return ;
+		stack->top = popee->next;
+		popee->next = NULL;
+		stack->size--;
 	}
-	ind = 0;
-	cur = stack->top;
-	while (cur)
-	{
-		cur->index = ind;
-		if (cur == stack->top)
-		{
-			min = cur;
-			max = cur;
-		}
-		else
-		{
-			if (cur->val < min->val)
-				min = cur;
-			if (cur->val > max->val)
-				max = cur;
-		}
-		ind++;
-		cur = cur->next;
-	}
-	stack->minval = min->val;
-	stack->minind = min->index;
-	stack->maxval = max->val;
-	stack->maxind = max->index;
+	return (popee);
 }
 
 int	stack_push_top_node(t_stack *stack, t_snode *snode)

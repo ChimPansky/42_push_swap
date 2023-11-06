@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:43:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/05 13:03:02 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:40:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	read_and_execute_ops(t_stack *stack_a, t_stack *stack_b)
 	while (op)
 	{
 		ft_str_chr_replace(op, '\n', '\0');
-		if (!stack_execute_op(op, stack_a, stack_b))
+		if (!stack_execute_op(op, stack_a, stack_b, 0))
 		{
 			free(op);
 			stack_clear(stack_a);

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:38:32 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/04 13:13:20 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:00:09 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,17 @@ int	stack_rotate_down(t_stack *stack)
 	return (1);
 }
 
+// used in both push_swap and checker
+// difference: push_swap executes and prints operation
+//			   checker only executes operation
 int	stack_execute_op(
-	char *op, t_stack *stack_a, t_stack *stack_b)
+	char *op, t_stack *stack_a, t_stack *stack_b, int print)
 {
 	int	op_valid;
 
 	op_valid = 0;
+	if (print)
+		ft_dprintf(OPERATIONS_FD, "%s\n", op);
 	if (!ft_strncmp(op, "sa", 3) || !ft_strncmp(op, "ss", 3))
 		op_valid = stack_swap(stack_a);
 	if (!ft_strncmp(op, "sb", 3) || !ft_strncmp(op, "ss", 3))

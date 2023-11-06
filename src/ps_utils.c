@@ -6,12 +6,11 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:04:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/04 14:10:22 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:11:06 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 void	free_splitted(char	**splitted)
 {
@@ -28,6 +27,8 @@ void	free_splitted(char	**splitted)
 	free(to_free);
 }
 
+// interpret program arguments as elements of stack to be sorted.
+// for each argument check that it is an integer as well as no duplicate
 int	stack_read(int ac, char **av, t_stack *stack)
 {
 	int		i;
@@ -40,7 +41,7 @@ int	stack_read(int ac, char **av, t_stack *stack)
 	{
 		splitted = ft_split(av[i++], ' ');
 		to_free = splitted;
-		while (*splitted)
+		while (splitted && *splitted)
 		{
 			if (!ft_str_isint(*splitted, &new_val)
 				|| stack_find_val(*stack, new_val) != -1

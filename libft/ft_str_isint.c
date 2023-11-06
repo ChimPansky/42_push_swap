@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:57:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/03 11:42:30 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/05 22:11:47 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,3 @@ int	ft_str_isint(char *s, int *target)
 	*target = result * neg_mult;
 	return (isnum);
 }
-/*
-int	main()
-{
-	int a;
-	printf("%d", ft_str_isint("-", &a));
-}
-*/

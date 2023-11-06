@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:09:22 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/30 08:40:24 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:24:03 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	printed = ft_vdprintf(STDOUT_FILENO , format, args);
+	printed = ft_vdprintf(STDOUT_FILENO, format, args);
 	va_end(args);
 	return (printed);
 }
