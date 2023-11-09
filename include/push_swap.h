@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 13:42:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/06 13:24:29 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:42:23 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		stack_push_bot_val(t_stack *stack, int val);
 t_snode	*stack_bottom(t_stack *stack);
 void	stack_snode_del(t_snode *snode);
 void	stack_clear(t_stack *stack);
-//void	stack_print(t_stack stack);
-//void	stacks_print(t_stack stack_a, t_stack stack_b);
+void	stack_print(t_stack stack);
+void	stacks_print(t_stack stack_a, t_stack stack_b);
 
 // Stack Operations (swap, push, rotate, rrotate):
 int		stack_swap(t_stack *stack);

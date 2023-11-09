@@ -1,8 +1,8 @@
 NAME = libft.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g -I ../include
-HEADER = ../include/libft.h
-#HEADER = ./libft.h
+CFLAGS = -Wall -Werror -Wextra
+INCLUDE_DIR = ../include/
+HEADER = $(INCLUDE_DIR)libft.h
 
 #Colors
 DEF_COLOR = \033[0;39m
@@ -25,6 +25,7 @@ SRC_FILES = ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 	ft_lstnew_bonus ft_lstadd_front_bonus ft_lstsize_bonus \
 	ft_lstlast_bonus ft_lstadd_back_bonus ft_lstdelone_bonus \
 	ft_lstclear_bonus ft_lstiter_bonus ft_lstmap_bonus	\
+	ft_free_and_null \
 	ft_get_int_order_base ft_itoa_base_signed ft_itoa_base_unsigned	\
 	ft_iif \
 	ft_strjoin_free ft_substr_free \
@@ -35,7 +36,7 @@ SRC_FILES = ft_atoi ft_bzero ft_calloc ft_isalnum ft_isalpha ft_isascii \
 	ft_print_memory	\
 	ft_printf ft_printf_config ft_printf_manipulations \
 	ft_printf_output ft_printf_utils \
-	ft_free_and_null get_next_line
+	get_next_line
 
 
 SRC = $(addsuffix .c, $(SRC_FILES))
@@ -47,7 +48,8 @@ $(NAME): $(OBJ) $(HEADER)
 	@echo "$(GREEN)Library $(NAME) created!$(DEF_COLOR)"
 
 %.o : %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+#$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -I $(INCLUDE_DIR) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 

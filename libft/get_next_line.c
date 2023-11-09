@@ -6,59 +6,24 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:05:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/10/30 09:08:14 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:05:34 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	gnl_init(int fd, t_buffer *buf, t_buffer *line, int *err)
+static void	fill_buf(int fd, t_buffer *buf, int *err)
 {
-	line->cont = NULL;
-	line->len = 0;
-	*err = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	if (!buf->cont)
+	buf->last_read = read(fd, buf->str, BUFFER_SIZE);
+	buf->len = buf->last_read;
+	if (buf->last_read < 0)
 	{
-		buf->cont = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		if (!buf->cont)
-			return (0);
-		buf->len = 0;
-		buf->last_read = -2;
+		buf->str[0] = '\0';
+		*err = 1;
 	}
-	if ((!buf->len && !buf->last_read))
-	{
-		ft_free_and_null((void **)buf->cont);
-		buf->len = 0;
-		return (0);
-	}
-	return (1);
 }
 
-static int	check_and_fill_buf(int fd, t_buffer *buf, int *err)
-{
-	int	i;
-
-	if (!buf->len)
-	{
-		buf->last_read = read(fd, buf->cont, BUFFER_SIZE);
-		buf->len = buf->last_read;
-		if (buf->last_read < 0)
-		{
-			*err = 1;
-			return (-1);
-		}
-	}
-	i = 0;
-	while (i < buf->len && buf->cont[i] != '\n')
-		i++;
-	if (i == buf->len)
-		return (-1);
-	return (i + 1);
-}
-
-static void	move_buf_line(t_buffer *buf, t_buffer *line, int nbytes, int *err)
+static void	move_buf_line(t_buffer *buf, t_line *line, int nbytes, int *err)
 {
 	char	*new;
 
@@ -68,39 +33,43 @@ static void	move_buf_line(t_buffer *buf, t_buffer *line, int nbytes, int *err)
 		*err = 1;
 		return ;
 	}
-	if (line->cont && line->len > 0)
-		ft_memmove(new, line->cont, line->len);
-	ft_memmove(new + line->len, buf->cont, nbytes);
+	if (line->str && line->len > 0)
+		ft_memmove(new, line->str, line->len);
+	ft_memmove(new + line->len, buf->str, nbytes);
 	line->len += nbytes;
 	new[line->len] = '\0';
-	free(line->cont);
-	line->cont = new;
+	free(line->str);
+	line->str = new;
 	if (nbytes == buf->len)
+	{
+		buf->str[0] = '\0';
 		buf->len = 0;
+	}
 	else
 	{
-		ft_memmove(buf->cont, buf->cont + nbytes, buf->len - nbytes);
+		ft_memmove(buf->str, buf->str + nbytes, buf->len - nbytes);
 		buf->len -= nbytes;
 	}
 }
 
-static int	create_line(int fd, t_buffer *buf, t_buffer *line, int *err)
+static int	create_line(int fd, t_buffer *buf, t_line *line, int *err)
 {
 	int		nbytes;
-	char	last;
 
-	nbytes = check_and_fill_buf(fd, buf, err);
+	nbytes = 0;
+	if (!line || buf->str[0] == '\0')
+		fill_buf(fd, buf, err);
 	if (*err)
 		return (1);
-	if (nbytes < 0)
-		nbytes = buf->len;
-	if (!buf->len && !buf->last_read)
-		return (1);
-	move_buf_line(buf, line, nbytes, err);
+	while (nbytes < buf->len && buf->str[nbytes] != '\n')
+		nbytes++;
+	if (nbytes < buf->len)
+		nbytes++;
+	if (nbytes)
+		move_buf_line(buf, line, nbytes, err);
 	if (*err)
 		return (1);
-	last = line->cont[line->len - 1];
-	if (last == '\n')
+	if ((line->str && line->str[line->len - 1] == '\n') || buf->last_read == 0)
 		return (1);
 	return (0);
 }
@@ -108,19 +77,22 @@ static int	create_line(int fd, t_buffer *buf, t_buffer *line, int *err)
 char	*get_next_line(int fd)
 {
 	static t_buffer	buf[MAX_FDS];
-	t_buffer		line;
+	t_line			line;
 	int				err;
 
-	if (!gnl_init(fd, &buf[fd], &line, &err))
-		return (NULL);
+	line.str = NULL;
+	line.len = 0;
+	err = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
 	while (!create_line(fd, &buf[fd], &line, &err))
 		;
 	if (err)
-		ft_free_and_null((void **)&line.cont);
-	if (!line.cont || err || (!buf[fd].len && !buf[fd].last_read))
+		ft_free_and_null((void **)&line.str);
+	if (!line.str || (!buf[fd].len && !buf[fd].last_read))
 	{
-		ft_free_and_null((void **)&buf[fd].cont);
+		buf[fd].str[0] = '\0';
 		buf[fd].len = 0;
 	}
-	return (line.cont);
+	return (line.str);
 }

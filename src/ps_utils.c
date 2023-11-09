@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 12:04:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/06 11:11:06 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/08 21:29:21 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	free_splitted(char	**splitted)
 // for each argument check that it is an integer as well as no duplicate
 int	stack_read(int ac, char **av, t_stack *stack)
 {
-	int		i;
 	int		new_val;
 	char	**splitted;
 	char	**to_free;
+	int		i;
 
 	i = 1;
 	while (i < ac)

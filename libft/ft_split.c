@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 13:48:06 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/03 11:33:23 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:42:18 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	ft_create_words(char **res, char *str, int wordc, char sep)
 	size_t	wlen;
 
 	i = 0;
-	wlen = 0;
 	while (i < wordc)
 	{
 		wlen = 0;

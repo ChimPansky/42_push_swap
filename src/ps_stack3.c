@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack3..c                                       :+:      :+:    :+:   */
+/*   ps_stack3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:42:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/06 11:48:13 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:15:38 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	stack_clear(t_stack *stack)
 	stack_reset(stack);
 }
 
-/*
 void	stack_print(t_stack stack)
 {
 	t_snode	*current;
@@ -94,4 +93,3 @@ void	stacks_print(t_stack stack_a, t_stack stack_b)
 	ft_printf("---------------\n");
 	ft_printf("%s:%4d |%s:%4d\n", "a", stack_a.size, "b", stack_b.size);
 }
-*/

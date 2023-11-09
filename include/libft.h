@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 18:40:07 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/06 15:36:48 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:04:56 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int		ft_str_isint(char *c, int *target);
 size_t	ft_str_chr_replace(char *s, char old_c, char new_c);
 int		ft_abs(int x);
 int		ft_max(int a, int b);
+void	ft_free_and_null(void **ptr);
 
 // Libft Additions for Printf:
 size_t	ft_get_int_order_base(size_t nb, size_t base_len);
@@ -143,7 +144,7 @@ char	*apply_precision_s(char *s, int prec);
 
 // Get Next Line Additions (put in separate header?):
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 65
 # endif
 
 # ifndef MAX_FDS
@@ -152,12 +153,17 @@ char	*apply_precision_s(char *s, int prec);
 
 typedef struct s_buffer
 {
-	char	*cont;
+	char	str[BUFFER_SIZE + 1];
 	ssize_t	len;
 	ssize_t	last_read;
 }				t_buffer;
 
-void	ft_free_and_null(void **ptr);
+typedef struct s_line
+{
+	char	*str;
+	ssize_t	len;
+}				t_line;
+
 char	*get_next_line(int fd);
 
 #endif

@@ -1,7 +1,7 @@
 NAME = push_swap
 NAME_BONUS = checker
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 SOURCE_DIR = src/
 INCLUDE_DIR = include/
 LIBFT_DIR = libft/
@@ -34,12 +34,16 @@ OBJ = $(SRC:.c=.o)
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-all: libft
+all:
+	make libft
 	make $(NAME)
 	make $(NAME_BONUS)
 
 libft:
 	make -C $(LIBFT_DIR)
+
+$(LIBFT_DIR)$(LIBFT_NAME):
+	make libft
 
 $(NAME): $(LIBFT_DIR)$(LIBFT_NAME) $(OBJ) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME) -o $(NAME)
@@ -63,4 +67,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all libft clean fclean re bonus
+.PHONY: all libft bonus clean fclean re
