@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 21:43:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2023/11/10 11:33:03 by tkasbari         ###   ########.fr       */
+/*   Updated: 2023/12/07 21:40:53 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@
 int	read_and_execute_ops(t_stack *stack_a, t_stack *stack_b)
 {
 	char	*op;
+	int		i;
 
+	i = 1;
+	stacks_print(*stack_a, *stack_b);
+	ft_printf("\n#%d: ", i);
 	op = get_next_line(STDIN_FILENO);
 	while (op)
 	{
+		i++;
 		ft_str_chr_replace(op, '\n', '\0');
 		if (!stack_execute_op(op, stack_a, stack_b, 0))
 		{
@@ -30,9 +35,12 @@ int	read_and_execute_ops(t_stack *stack_a, t_stack *stack_b)
 			stack_clear(stack_b);
 			return (0);
 		}
+		stacks_print(*stack_a, *stack_b);
 		free(op);
+		ft_printf("\n#%d: ", i);
 		op = get_next_line(STDIN_FILENO);
 	}
+	ft_printf("\n");
 	return (1);
 }
 
